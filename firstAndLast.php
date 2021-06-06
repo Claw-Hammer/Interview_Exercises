@@ -19,8 +19,8 @@ Output: [-1, -1]
 
 */
 
-$arr = array(1,2,3,4,5,6,10);
-$target = 9;
+$arr = [1,3,3,5,7,8,9,9,9,15];
+$target = 8;
 $first = '';
 $last = '';
 
@@ -38,7 +38,7 @@ if(!in_array($target, $arr)) {
             for($j=$i+1; $j < count($arr); $j++) {
                 
                 if($arr[$j] == $target) {
-                    $last = $j;
+                    $last = $j;      
                 }
             }
             
@@ -46,5 +46,6 @@ if(!in_array($target, $arr)) {
         }
     }
     
-    echo "[$first, $last]";
+    $final = $last == '' ? 'null' : $last;
+    echo "[$first, $final]";
 }
