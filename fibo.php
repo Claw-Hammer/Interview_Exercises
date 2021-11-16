@@ -1,23 +1,52 @@
 <?php  
-// PHP code to get the Fibonacci series
-// Recursive function for fibonacci series.
-function Fibonacci($number): \Generator {
-      
-    // if and else if to generate first two numbers
-    if ($number == 0)
-        return 0;    
-    else if ($number == 1)
-        return 1;    
-      
-    // Recursive Call to get the upcoming numbers
-    else
-    $it = new \RecursiveIteratorIterator((Fibonacci($number-1) + Fibonacci($number-2)));
-        yield from $it;
+
+function fibonacciRecursive($number)
+{      
+    if ($number <= 1) {
+        return $number;
+    }
+
+    return (fibonacciRecursive($number-1) + fibonacciRecursive($number-2));
 }
-  
-// Driver Code
-// $number = 100;
-// for ($counter = 0; $counter < $number; $counter++) {  
-//     echo Fibonacci($counter),' ';
-// }
-var_dump(Fibonacci(10));
+
+
+function fibonacciSequential($n)
+{
+    if ($n <= 1) {
+        return $n;
+    }
+
+    $n2 = 0;
+    $n1 = 1;
+
+    for ($i = 2; $i < $n; $i++) {
+        
+        $n2_ = $n2;
+        $n2 = $n1;
+        $n1 = ($n1 + $n2_);
+    }
+
+    return $n2 + $n1;
+}
+
+
+function startFibonacci($number)
+{
+    for ($counter = 0; $counter <= $number; $counter++) {  
+        // echo fibonacciRecursive($counter) . ' ';
+        echo fibonacciSequential($counter) . ' ';
+    }
+}
+
+
+$start=microtime(true);
+
+    startFibonacci(50);
+
+$end=microtime(true);
+
+$time = (int)(($end-$start)*1000)."ms -> " . number_format($end - $start,12);
+
+echo "<br/><br/>";
+echo "Processing time: {$time} \r\n";
+
